@@ -18,10 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <Authentication />
       <html lang="en">
         <body>
-          <StoreProvider>{children}</StoreProvider>
+          <StoreProvider>
+            <Authentication />
+            {children}
+          </StoreProvider>
         </body>
       </html>
     </>

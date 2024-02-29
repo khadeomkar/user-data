@@ -3,6 +3,8 @@ import { Suspense, lazy, useEffect } from "react";
 import { Card } from "antd";
 import { useRouter } from "next/navigation";
 import { setCookie, getCookie, removeCookie } from "../../helpers/Cookie";
+import { addLoginData, removeLoginData } from "@/lib/features/loginSlice";
+import { useDispatch } from "react-redux";
 import UsersAPI from "../../services/Users/Users";
 import styles from "../page.module.css";
 
@@ -10,6 +12,7 @@ const UsersApi = new UsersAPI();
 
 const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const userId = getCookie("userId");
@@ -27,8 +30,8 @@ const Login = () => {
 
   const getAuthUser = async (userId: any) => {
     const userResponse = await UsersApi.getAuthUser(userId);
-    // console.log("userResponse.data.id: ", userResponse.data.id);
     setCookie("userId", userResponse.data.id);
+    dispatch(addLoginData(userResponse.data));
     router.push("/");
   };
 
@@ -46,7 +49,7 @@ const Login = () => {
       setCookie("refreshToken", response.data.refreshToken);
       getAuthUser(response.data.userId);
     } else {
-      // console.log("error found");
+      dispatch(removeLoginData());
     }
   };
 
