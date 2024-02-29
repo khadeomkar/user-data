@@ -1,0 +1,45 @@
+<script>
+  $(document).ready(function () {
+    gerateToken();
+
+    function gerateToken() {
+      $.ajax({
+        url: "https://trial2.thetalentpool.co.in/oauth/oauth/token?username=Gynoveda&password=netlynx426&grant_type=client_credentials",
+        method: "POST",
+        headers: {
+          Authorization: "Basic c2tpbGxseW5jdWF0X3Jlc3Q6c2tpbGx1YXQ=", // Add your desired header
+          "Content-Type": "application/x-www-form-urlencoded", // Add additional headers if needed
+        },
+
+        success: function (response) {
+          // Process the response or redirect to a new page
+          getPositionList(response, jsonData);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          console.error("Error:", textStatus, errorThrown);
+          // Handle errors here
+        },
+      });
+    }
+
+    function getPositionList(res, dataValues) {
+      $.ajax({
+        url: "https://trial2.thetalentpool.co.in/recruitment/rest/position/published-to-website/list",
+        method: "POST",
+        headers: {
+          Authorization: "bearer " + res.access_token, // Add your desired header
+          "Content-Type": "application/json", // Add additional headers if needed
+        },
+
+        success: function (response) {
+          // Process the response or redirect to a new page
+          console.log(response);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          console.error("Error:", textStatus, errorThrown);
+          // Handle errors here
+        },
+      });
+    }
+  });
+</script>

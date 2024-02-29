@@ -1,0 +1,21 @@
+@use 'colors';
+
+body {
+    font: 100% colors.$font-stack;
+}
+
+.light-theme {
+    background-color: colors.$seconday-color;
+
+    .text-color {
+        color: #000;
+    }
+}
+
+.dark-theme {
+    background-color: colors.$primary-color;
+
+    .text-color {
+        color: #FFF;
+    }
+}

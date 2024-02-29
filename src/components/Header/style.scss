@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  margin-bottom: 20px;
+
+  nav {
+    ul {
+      list-style-type: none;
+      li {
+        display: inline-block;
+        margin-right: 20px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      li:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+
+  .chnage-theme {
+    cursor: pointer;
+  }
+}
